@@ -12,7 +12,7 @@ inline int read() {
 
 signed main() {
     
-    system("pause");
+    
     
     
     #ifndef ONLINE_JUDGE
