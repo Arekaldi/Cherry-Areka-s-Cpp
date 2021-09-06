@@ -12,20 +12,25 @@ inline int read() {
     return x * f;
 }
 
-const int maxm = 1e4 + 1, maxt = 1e7 + 1;
+const int maxn = 1e4 + 1;
 
-int t, m;
-int v[maxm], w[maxm];
-int f[maxt];
+int f[10000001], t, m;
+int w[maxn], v[maxn];
 
 signed main() {
-	t = read(), m = read();
-	for(int i = 1; i <= m; ++i) 
+    t = read(), m = read();
+	for(int i = 1; i <= m; ++i)
 		w[i] = read(), v[i] = read();
-	
-	for(int i = 1; i <= m; ++i) 
+
+	for(int i = 1; i <= m; ++i) {
 		for(int j = w[i]; j <= t; ++j)
 			f[j] = max(f[j], f[j - w[i]] + v[i]);
-			
-	cout << f[t] << endl;
+	}
+    cout << f[t] << endl;
+    
+    
+    #ifndef ONLINE_JUDGE
+        getchar();
+    #endif
+    return 0;
 }
