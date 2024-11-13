@@ -26,8 +26,8 @@ void write(int x)
 }
 
 int tot = -1;
-int head[210], next[10010], val[10010], to[10010];
-int cur[210];
+int head[5010], next[20010], val[20010], to[20010];
+int cur[5010];
 
 void addEdge(int u, int v, int w) {
     to[++tot] = v, next[tot] = head[u], head[u] = tot;
@@ -35,7 +35,7 @@ void addEdge(int u, int v, int w) {
 }
 
 std :: queue <int> q;
-int dep[210], numOfDepth[210];
+int dep[5010], numOfDepth[5010];
 void bfs(int s, int t) {
     q.push(t);
     dep[t] = 1, numOfDepth[1] = 1;
@@ -91,29 +91,33 @@ int ISAP() {
     return ans;
 }
 
-int map[210][210];
+int a[410], p[410], b[410], qq[410];
 
 signed main() {
-    int T = read();
-    while(T--) {
-        memset(head, -1, sizeof(head));
-        memset(dep, 0, sizeof(dep));
-        memset(numOfDepth, 0, sizeof(numOfDepth));
-        memset(next, 0, sizeof(next));
-        memset(val, 0, sizeof(val));
-        memset(cur, -1, sizeof(cur));
-        memset(to, 0, sizeof(to));
-        ans = 0;
-        tot = -1;
-        n = read(), m = read(), s = read(), t = read();
-        for(int i = 1; i <= m; i++) {
-            int u = read(), v = read(), w = read();
-            if(u == v)
-                continue;
-            addEdge(u, v, w), addEdge(v, u, 0);
-        }
-        write(ISAP());
-        putchar('\n');
+    memset(head, -1, sizeof(head));
+    n = read();
+    for(int i = 1; i <= n; ++i)
+        a[i] = read();
+    for(int i = 1; i <= n; ++i)
+        p[i] = read();
+    for(int i = 1; i <= n; ++i)
+        b[i] = read();
+    for(int i = 1; i <= n; ++i)
+        qq[i] = read();
+    s = (n << 1) | 1, t = s + 1;
+    for(int i = 1; i <= n; ++i) {
+        addEdge(s, i, 1);
+        addEdge(i + n, t, 1);
     }
+    for(int i = 1; i <= n; ++i) {
+        for(int j = n + 1; j <= (n << 1); ++j) {
+            int male = i, female = j - n;
+            if(a[male]>= qq[female] && b[female] >= p[male]) {
+                addEdge(i, j, 1ll << 31), addEdge(j, i, 0);
+            }
+        }
+    }
+    n = t;
+    write(ISAP());
     return 0;
 }
