@@ -6,6 +6,9 @@
 
 #define int long long
 
+#define MAXN 20010
+#define MAXM 100010
+
 int read(void) {
     int x, f = 1;
     char ch;
@@ -26,8 +29,8 @@ void write(int x)
 }
 
 int tot = -1;
-int head[5010], next[20010], val[20010], to[20010];
-int cur[5010];
+int head[MAXN], next[MAXM], val[MAXM], to[MAXM];
+int cur[MAXN];
 
 void addEdge(int u, int v, int w) {
     to[++tot] = v, next[tot] = head[u], head[u] = tot;
@@ -35,7 +38,7 @@ void addEdge(int u, int v, int w) {
 }
 
 std :: queue <int> q;
-int dep[5010], numOfDepth[5010];
+int dep[MAXN], numOfDepth[MAXN];
 void bfs(int s, int t) {
     q.push(t);
     dep[t] = 1, numOfDepth[1] = 1;
@@ -91,7 +94,7 @@ int ISAP() {
     return ans;
 }
 
-int a[410], p[410], b[410], qq[410];
+int a[MAXN], p[MAXN], b[MAXN], qq[MAXN];
 
 signed main() {
     memset(head, -1, sizeof(head));
@@ -106,18 +109,19 @@ signed main() {
         qq[i] = read();
     s = (n << 1) | 1, t = s + 1;
     for(int i = 1; i <= n; ++i) {
-        addEdge(s, i, 1);
-        addEdge(i + n, t, 1);
+        addEdge(s, i, 1), addEdge(i, s, 0);
+        addEdge(i + n, t, 1), addEdge(t, i + n, 0);
     }
     for(int i = 1; i <= n; ++i) {
         for(int j = n + 1; j <= (n << 1); ++j) {
             int male = i, female = j - n;
             if(a[male]>= qq[female] && b[female] >= p[male]) {
-                addEdge(i, j, 1ll << 31), addEdge(j, i, 0);
+                addEdge(i, j, 1), addEdge(j, i, 0);
             }
         }
     }
     n = t;
     write(ISAP());
+    putchar('\n');
     return 0;
 }
