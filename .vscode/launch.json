@@ -9,7 +9,7 @@
             "type": "cppdbg",
             "request": "launch",
             "preLaunchTask": "Areka_Code",
-            "program": "/Areka/Codes/Language C/C_Code.out",
+            "program": "/home/areka/Areka/Codes/Language C/C_Code.out",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
