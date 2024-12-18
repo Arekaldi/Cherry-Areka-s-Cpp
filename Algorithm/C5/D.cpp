@@ -64,6 +64,8 @@ double distBetweenCircleandLine(Node A, Node B, Node C, Node D, Node E) {
 int main() {
     int T = read();
     while(T--) {
+        // printf("%.3lf\n", (double) 0);
+        // continue;
         for(int i = 1; i <= 5; i++)
             nodes[i].x = read(), nodes[i].y = read();
         double ans = 1 << 30;
